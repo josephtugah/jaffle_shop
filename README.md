@@ -1,2 +1,2 @@
 # jaffle_shop
-The object is to transform data Jaffle's data for BI consumption leveraging dbt
+The objective of this project is to transform data Jaffle's data for BI consumption leveraging dbt
