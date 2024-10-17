@@ -1,0 +1,31 @@
+version: 2
+
+sources:
+  - name: stripe
+    description: A clone of a Postgres application database containing payments data.
+    database: dbt-tutorial
+    schema: stripe
+    tables:
+      - name: payment
+        description: Raw customer payments data for orders made by customers.
+        columns:
+          - name: id
+            description: Primary key for payments
+            
+          - name: orderid
+            description: The unique identifier for the order associated with this payment.
+            
+          - name: paymentmethod
+            description: "{{ doc('payment_method') }}"
+            
+          - name: status
+            description: "{{ doc('payment_status') }}"
+            
+          - name: amount
+            description: The amount of money involved in the payment. This can be zero if the payment is not applicable or refunded
+            
+          - name: created
+            description: The date the payment was created.
+            
+          - name: _batched_at
+            description: The timestamp indicating when the payment record was batched, useful for tracking data loads.
