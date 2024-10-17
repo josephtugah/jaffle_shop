@@ -1,0 +1,17 @@
+version: 2
+
+models:
+  - name: fct_orders
+    description: This table contains transactional data for all orders placed by customers, including order details and payment amounts
+    columns:
+      - name: order_id
+        description: Primary key for each order
+
+      - name: customer_id
+        description: Foreign key linking the order to a specific customer
+
+      - name: order_date
+        description: "{{ doc('order_date') }}"
+
+      - name: amount
+        description: The total amount paid for the order, including any applicable taxes and discounts
