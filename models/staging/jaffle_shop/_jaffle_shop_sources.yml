@@ -1,0 +1,45 @@
+version: 2
+
+sources:
+  - name: jaffle_shop
+    description: A clone of a Postrges appliation databases.
+    database: dbt-tutorial
+    schema: jaffle_shop
+    tables:
+      - name: customers
+        description: Raw customers data.
+        columns:
+          - name: id
+            description: Primary key for customers data.
+          - name: first_name
+            description: First name of the customer.
+          - name: last_name
+            description: The last name of the customer.
+          - name: first_order_date
+            description: "{{ doc('first_order_date') }}"
+          - name: most_recent_order
+            description: The date when the customer made their most recent order.
+          - name: number_of_orders
+            description: "{{ doc('num_of_orders') }}"
+
+      - name: orders
+        description: Raw orders data.
+        columns:
+          - name: id
+            description: Primary key for orders data.
+          - name: user_id
+            description: Primary key for customer who placed the order order.
+          - name: order_date
+            description: "{{ doc('order_date') }}"
+          - name: status
+            description: "{{ doc('order_status_src') }}"
+        loaded_at_field: order_date
+        freshness: 
+          error_after:
+            count: 12
+            period: hour
+          warn_after:
+            count: 24
+            period: hour
+        
+

@@ -1,0 +1,28 @@
+
+version: 2
+
+models:
+  - name: stg_stripe__payments
+    description: Staged payments details for orders made from the Jaffle Shop, including amounts, status, and methods used.
+    columns: 
+      - name: payment_id
+        description: Unique identifier for each payment made in the Jaffle Shop.
+        tests:
+          - unique
+          - not_null       
+
+      - name: order_id
+        description: Identifier for the order associated with the payment. Each order can have multiple payments.
+
+      - name: payment_method
+        description: "{{ doc('payment_method') }}"
+
+      - name: status
+        description: "{{ doc('payment_status') }}"
+
+      - name: amount
+        description: The amount paid in the transaction, with refunds represented as negative values.
+
+      - name: created_at
+        description: The date when the payment was created in the system.
+
