@@ -117,6 +117,7 @@ Here is an example query run on the `dim_customers` data to get the top 10 custo
 
 <img width="694" alt="result-query" src="https://github.com/user-attachments/assets/c64a51e3-d2b5-4123-8942-d51e3ab08032">
 
+The tranformed tables, fct_orders and dim_customers can be imported into a BI tool to build reports for insights
 
 ## Conclusion
 This project demonstrated how to transform sales data in BigQuery using dbt Cloud, while following best practices for data documentation, testing, and deployment.
