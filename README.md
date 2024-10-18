@@ -39,6 +39,7 @@ The goal was to create two tables:
 - **dbt_project.yml**: Configures the project, including materialization settings.
   - **Staging models** are materialized as views.
   - **Marts models** are materialized as tables.
+Refer to the dbt_project.yml file in the README file
 
 ### Folders in the Project
 
@@ -56,16 +57,20 @@ Sources are documented in YAML files:
 - **_jaffle_shop_sources.yml** 
 - **_stg_stripe_sources.yml**
 
+
 These files document raw data ingested from BigQuery and ensure data freshness. [Learn more about source freshness testing here](https://docs.getdbt.com/docs/build/sources#snapshotting-source-data-freshness).
 
 ### Referential Integrity Tests
-Relationship tests validate that child records have corresponding parent records. [See more about data tests here](https://docs.getdbt.com/reference/resource-properties/data-tests).
+Relationship tests validate that child records have corresponding parent records. This property is referred to as "referential integrity". [See more about data tests here](https://docs.getdbt.com/reference/resource-properties/data-tests).
 
 ## Data Transformations
 
 1. **Staging Data**
    - Light transformations on customers and orders were performed to create `stg_jaffle_shop_customers` and `stg_jaffle_shop__orders`.
-   - Payment data was also staged in `stg_stripe__payments`. 
+   - Payment data was also staged in `stg_stripe__payments`.
+  
+   <img width="909" alt="stage-stripe-payemtns" src="https://github.com/user-attachments/assets/940a53f0-73f1-4911-9584-4de8d003ad09">
+
 
 2. **Creating fct_orders**
    - Contains transactional data for orders, including payment details.
@@ -74,6 +79,8 @@ Relationship tests validate that child records have corresponding parent records
 3. **Creating dim_customers**
    - Contains customer information and order history, including lifetime value.
    - Joins were performed on customer and order data using CTEs.
+  
+
 
 ## Documentation
 - dbt provides a way to generate project documentation and render it as a website.
@@ -84,6 +91,11 @@ Relationship tests validate that child records have corresponding parent records
 Descriptions were added to models, columns, and sources for enhanced documentation. [Learn more about dbt documentation](https://docs.getdbt.com/docs/collaborate/documentation).
 
 The **_stripe_schema.yml** file documents the models in the Stripe folder. An **_stripe.md** file contains doc blocks that describe fields (e.g., `order_status`). These blocks are referenced in the `stg_jaffle_shop__orders.yml` file.
+
+The image below gives snapshots of documentations on the dim_customers data.
+
+<img width="943" alt="dbt-docs" src="https://github.com/user-attachments/assets/aa4efc83-b49d-4a5b-98e8-b2328ae1ec5e">
+
 
 ## Deployment
 
@@ -96,11 +108,14 @@ The **_stripe_schema.yml** file documents the models in the Stripe folder. An **
 
 3. **Scheduling Jobs**
    - A job called **Daily Job** was scheduled to run at **8:00** and **16:00** UTC every day.
+![Screenshot 2024-10-18 110211](https://github.com/user-attachments/assets/fb91bb83-fde4-45d5-bd1b-fcfc26947950)
+
 
 ## Query for Top 10 Customers by Lifetime Value
 
 Here is an example query run on the `dim_customers` data to get the top 10 customers by lifetime value:
 
+<img width="694" alt="result-query" src="https://github.com/user-attachments/assets/c64a51e3-d2b5-4123-8942-d51e3ab08032">
 
 
 ## Conclusion
